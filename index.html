@@ -118,6 +118,8 @@ main{min-width:0;padding:28px 22px 60px}
   -webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-padding:0 22px;
 }
 .tabbar::-webkit-scrollbar{display:none}
+.meal-week-scroll{scrollbar-width:none}
+.meal-week-scroll::-webkit-scrollbar{display:none}
 .tab-btn{
   display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
   background:transparent;border:1.5px solid transparent;border-radius:8px;
@@ -541,6 +543,8 @@ main{min-width:0;padding:28px 22px 60px}
   -webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-padding:0 22px;
 }
 .tabbar::-webkit-scrollbar{display:none}
+.meal-week-scroll{scrollbar-width:none}
+.meal-week-scroll::-webkit-scrollbar{display:none}
 .tab-btn{
   display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
   background:transparent;border:1.5px solid transparent;border-radius:8px;
@@ -1366,7 +1370,7 @@ function renderMealPlan(){
       <button class="btn ghost" data-action="plan-next-week" aria-label="Next week">Week ›</button>
       <button class="btn" data-action="plan-today">Today</button>
     </div>
-    <div style="overflow-x:auto">
+    <div class="meal-week-scroll" style="overflow-x:auto">
       <div style="display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;min-width:760px">
         ${days.map(iso => {
           if (iso < RANGE_MIN || iso > RANGE_MAX) return `
