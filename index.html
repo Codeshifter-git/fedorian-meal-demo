@@ -86,34 +86,50 @@ input,textarea,select{font-family:inherit;font-size:15px;color:var(--ink)}
 ::placeholder{color:#9AA39E}
 
 /* ---------- App layout ---------- */
-.app{display:flex;min-height:100vh;min-height:100dvh}
-main{flex:1;min-width:0;padding:28px 22px 60px}
-.wrap{max-width:940px;margin:0 auto}
+.app{min-height:100vh;min-height:100dvh}
+main{min-width:0;padding:28px 22px 60px}
+.wrap{max-width:1120px;margin:0 auto}
+.appfoot{max-width:1120px;margin:0 auto;padding:18px 4px calc(24px + env(safe-area-inset-bottom));text-align:center;font-size:12.5px;color:#9AA39E}
 
 /* ---------- Sidebar ---------- */
-.sidebar{
-  width:248px;flex:0 0 248px;background:var(--teal);color:var(--ivory);
-  position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
-  padding:26px 18px 18px;z-index:60;
+.topbar{
+  position:sticky;top:0;z-index:100;background:var(--teal);color:var(--ivory);
+  padding-top:env(safe-area-inset-top);
+  box-shadow:0 4px 18px rgba(11,56,59,.25);
 }
-.brand{padding:2px 6px 20px;border-bottom:1px solid rgba(247,243,236,.16);margin-bottom:16px}
-.wordmark{font-weight:800;letter-spacing:.34em;font-size:19px;color:#fff}
-.wordmark-sub{
+.topbar-inner{
+  max-width:1120px;margin:0 auto;padding:14px 22px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.topbar .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.topbar .wordmark{font-weight:800;letter-spacing:.34em;font-size:19px;color:#fff}
+.topbar .wordmark-sub{
   font-family:'Segoe Script','Brush Script MT','Comic Sans MS',cursive;
-  color:var(--gold);font-size:24px;line-height:1;margin-top:2px;
+  color:var(--gold);font-size:24px;line-height:1;
 }
-.brand-tag{margin-top:10px;font-size:10px;letter-spacing:.22em;font-weight:600;color:rgba(247,243,236,.65)}
-nav{display:flex;flex-direction:column;gap:4px}
-.nav-btn{
-  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-  background:transparent;border:none;border-left:3px solid transparent;
-  color:rgba(247,243,236,.85);font-size:14px;font-weight:600;
-  padding:11px 12px;border-radius:0 10px 10px 0;min-height:44px;
+.topbar .brand-tag{font-size:10px;letter-spacing:.22em;font-weight:600;color:rgba(247,243,236,.65)}
+.topbar-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .brand-owner{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold)}
+.topbar-gear{color:var(--ivory);border-color:rgba(247,243,236,.35)}
+.topbar-gear:hover{color:#fff;border-color:var(--gold);background:rgba(247,243,236,.08)}
+.tabbar{
+  display:flex;gap:8px;overflow-x:auto;padding:8px 22px 10px;
+  background:var(--ivory);border-bottom:1px solid var(--border);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-padding:0 22px;
+}
+.tabbar::-webkit-scrollbar{display:none}
+.tab-btn{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  background:transparent;border:1.5px solid transparent;border-radius:8px;
+  color:var(--ink-soft);font-size:14px;font-weight:600;
+  padding:9px 14px;min-height:44px;
   transition:background-color .18s ease,color .18s ease,border-color .18s ease;
 }
-.nav-btn:hover{background:rgba(247,243,236,.08);color:#fff}
-.nav-btn.active{background:rgba(199,161,92,.16);border-left-color:var(--gold);color:#fff}
-.sidefoot{margin-top:auto;padding:12px 6px 2px;font-size:11.5px;line-height:1.55;color:rgba(247,243,236,.55);border-top:1px solid rgba(247,243,236,.16)}
+.tab-btn:hover{background:#fff;border-color:var(--border);color:var(--teal)}
+.tab-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(11,56,59,.18)}
+.tab-btn .ic{width:20px;height:20px;color:var(--muted-teal);transition:color .18s ease}
+.tab-btn:hover .ic{color:var(--teal)}
+.tab-btn.active .ic{color:#fff}
 
 /* ---------- Views & cards ---------- */
 .view{display:none}
@@ -136,26 +152,28 @@ nav{display:flex;flex-direction:column;gap:4px}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   background:var(--teal);color:#fff;border:1px solid var(--teal);
-  font-size:14px;font-weight:600;padding:10px 18px;border-radius:10px;min-height:44px;
+  font-size:14px;font-weight:600;padding:10px 18px;border-radius:6px;min-height:44px;
   transition:background-color .18s ease,border-color .18s ease,transform .15s ease,box-shadow .15s ease;
 }
-.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,56,59,.14)}
+.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 0 0 2px rgba(199,161,92,.5),0 4px 12px rgba(11,56,59,.14)}
+.btn:active{transform:translateY(0);box-shadow:0 0 0 2px rgba(199,161,92,.65)}
 .btn:disabled:hover{transform:none;box-shadow:none}
 .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--teal-dark)}
-.btn.gold:hover{background:#B8934A}
+.btn.gold:hover{background:#B8934A;box-shadow:0 0 0 2px rgba(11,56,59,.28),0 4px 12px rgba(11,56,59,.14)}
 .btn.ghost{background:transparent;color:var(--teal);border-color:var(--border)}
 .btn.ghost:hover{border-color:var(--gold);background:#fff}
-.btn.small{padding:7px 13px;min-height:38px;font-size:13px}
+.btn.small{padding:10px 14px;min-height:44px;font-size:13px}
 .btn.danger{background:transparent;border-color:#E4C4B2;color:var(--danger)}
 .btn.danger:hover{background:#FBEEE7}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.tab-btn:focus-visible,.chip:focus-visible,.seg-btn:focus-visible,.swatch:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .icon-btn{
-  background:transparent;border:1px solid transparent;color:#9AA39E;border-radius:8px;
-  width:34px;height:34px;font-size:17px;line-height:1;flex:0 0 auto;
+  background:transparent;border:1px solid transparent;color:#9AA39E;border-radius:6px;
+  width:44px;height:44px;font-size:18px;line-height:1;flex:0 0 auto;
 }
 .icon-btn:hover{color:var(--danger);border-color:var(--border);background:#fff}
 .text-input,.text-area,.select-input{
-  width:100%;background:#fff;border:1px solid var(--border);border-radius:10px;
+  width:100%;background:#fff;border:1px solid var(--border);border-radius:8px;
   padding:11px 13px;outline:none;
 }
 .text-input:focus,.text-area:focus,.select-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,161,92,.18)}
@@ -166,7 +184,7 @@ input[type="file"]{display:none}
 
 /* Round check toggle (focus / todos / routines) */
 .check{
-  width:30px;height:30px;flex:0 0 30px;border-radius:50%;
+  width:44px;height:44px;flex:0 0 44px;border-radius:50%;
   border:2px solid var(--border);background:#fff;color:#fff;font-size:15px;font-weight:700;
   display:inline-flex;align-items:center;justify-content:center;line-height:1;padding:0;
   transition:background-color .18s ease,border-color .18s ease,transform .12s ease;
@@ -278,13 +296,14 @@ table.habit-table th.habit-name-col,table.habit-table td.habit-name-cell{
 /* ---------- Today habit chips ---------- */
 .chip-row{display:flex;flex-wrap:wrap;gap:9px}
 .chip{
-  border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:10px 16px;
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:10px 16px;
   font-size:14px;font-weight:600;color:var(--ink-soft);min-height:44px;
   transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .12s ease;
 }
 .chip:active{transform:scale(.95)}
-.chip:hover{border-color:var(--sage)}
-.chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+.chip:hover{border-color:var(--teal);color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(11,56,59,.18)}
 
 /* ---------- Routines ---------- */
 .routine-row{display:flex;align-items:center;gap:12px;padding:6px 0}
@@ -335,16 +354,16 @@ table.habit-table th.habit-name-col,table.habit-table td.habit-name-cell{
 
 /* ---------- Icons & motion ---------- */
 .ic{width:19px;height:19px;flex:0 0 auto}
-.nav-btn .ic{width:20px;height:20px;color:rgba(247,243,236,.55);transition:color .18s ease}
-.nav-btn:hover .ic{color:#fff}
-.nav-btn.active .ic{color:var(--gold)}
+.tab-btn .ic{width:20px;height:20px;color:var(--muted-teal);transition:color .18s ease}
+.tab-btn:hover .ic{color:var(--teal)}
+.tab-btn.active .ic{color:#fff}
 .btn .ic{width:17px;height:17px}
 .check .ic{width:16px;height:16px}
 .habit-cell .ic{width:15px;height:15px}
 .chip .ic{width:15px;height:15px;vertical-align:-2px;margin-right:1px}
 .glass .ic{width:22px;height:22px}
 .pill-label .ic{width:15px;height:15px;vertical-align:-2px;margin-right:3px}
-body,.card,.sidebar{transition:background-color .25s ease,color .25s ease}
+body,.card,.topbar,.tabbar{transition:background-color .25s ease,color .25s ease}
 @keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .view.active{animation:viewIn .22s ease}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -357,20 +376,20 @@ body,.card,.sidebar{transition:background-color .25s ease,color .25s ease}
 @keyframes focusGlow{0%{box-shadow:var(--shadow)}35%{box-shadow:0 0 0 3px rgba(199,161,92,.55),0 0 28px rgba(199,161,92,.5)}100%{box-shadow:var(--shadow)}}
 .card.focus-card.glow{animation:focusGlow 1.05s ease}
 
-/* ---------- Personalisation: greeting & sidebar owner ---------- */
+/* ---------- Personalisation: greeting & top-bar owner ---------- */
 .greeting{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:600;color:var(--gold);margin-top:6px}
 .brand-owner{margin-top:8px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold)}
-@media (max-width:860px){ .brand-owner{display:none !important} }
 
 /* ---------- Personalisation: controls ---------- */
 .swatch-row{display:flex;flex-wrap:wrap;gap:9px}
-.swatch{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:999px;padding:7px 13px 7px 8px;font-size:13px;font-weight:600;color:var(--ink-soft);min-height:40px;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
+.swatch{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:7px 13px 7px 8px;font-size:13px;font-weight:600;color:var(--ink-soft);min-height:44px;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
 .swatch .dot{width:24px;height:24px;border-radius:50%;border:2px solid rgba(24,31,28,.12);flex:0 0 auto}
-.swatch.on{border-color:var(--gold);color:var(--ink)}
+.swatch.on{border-color:var(--gold);color:var(--ink);box-shadow:0 0 0 2px rgba(199,161,92,.35)}
 .swatch.on .dot{box-shadow:0 0 0 3px rgba(199,161,92,.35)}
-.seg{display:flex;gap:8px;flex-wrap:wrap}
-.seg-btn{background:#fff;border:1.5px solid var(--border);color:var(--ink-soft);border-radius:10px;padding:9px 18px;font-size:13.5px;font-weight:600;min-height:42px;transition:background-color .18s ease,color .18s ease,border-color .18s ease}
-.seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.seg{display:inline-flex;gap:4px;flex-wrap:wrap;background:#F1EAD9;border:1px solid var(--border);border-radius:8px;padding:4px}
+.seg-btn{background:transparent;border:1.5px solid transparent;color:var(--ink-soft);border-radius:6px;padding:9px 18px;font-size:13.5px;font-weight:600;min-height:44px;transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease}
+.seg-btn:hover{color:var(--teal)}
+.seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 2px 8px rgba(11,56,59,.25)}
 
 /* ---------- Personalisation: accent themes (gold stays the constant secondary) ---------- */
 html[data-theme="midnight"]{--teal:#1B2A4A;--teal-dark:#111D34;--muted-teal:#5B729E;--sage:#7E93B5}
@@ -395,10 +414,18 @@ html[data-appearance="dark"] .cal-day,html[data-appearance="dark"] .swatch,html[
 html[data-appearance="dark"] .check,html[data-appearance="dark"] .habit-cell{background:var(--card)}
 html[data-appearance="dark"] .check.on{background:var(--sage);border-color:var(--sage)}
 html[data-appearance="dark"] .habit-cell.on{background:var(--sage);border-color:var(--sage)}
-html[data-appearance="dark"] .chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+html[data-appearance="dark"] .chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
 html[data-appearance="dark"] .pill.on{background:var(--gold);border-color:var(--gold);color:#fff}
 html[data-appearance="dark"] .glass.on{background:var(--muted-teal);border-color:var(--muted-teal);color:#fff}
 html[data-appearance="dark"] .seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+html[data-appearance="dark"] .tabbar{background:var(--card);border-bottom-color:var(--border)}
+html[data-appearance="dark"] .tab-btn{color:var(--ink-soft)}
+html[data-appearance="dark"] .tab-btn:hover{background:var(--card);color:var(--ink);border-color:var(--border)}
+html[data-appearance="dark"] .seg{background:var(--border)}
+html[data-appearance="dark"] .seg-btn{background:transparent}
+html[data-appearance="dark"] .btn.ghost{color:var(--ink)}
+html[data-appearance="dark"] .btn.ghost:hover{background:var(--card)}
+html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 html[data-appearance="dark"] .cal-day.selected{background:rgba(199,161,92,.14)}
 html[data-appearance="dark"] .inbox-row,html[data-appearance="dark"] .note-card{background:var(--card)}
 html[data-appearance="dark"] .sched-row,html[data-appearance="dark"] .week-day-row{border-bottom-color:var(--border)}
@@ -409,6 +436,17 @@ html[data-appearance="dark"] .btn.ghost{color:var(--ink)}
 html[data-appearance="dark"] .btn.ghost:hover{background:var(--card)}
 html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 
+/* ---------- Meal dashboard & split layouts (student shell) ---------- */
+/* Today dashboard: two columns of sections on desktop. */
+#view-today.active{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+#view-today>.view-head{grid-column:1/-1}
+#view-today>.card{margin-bottom:0}
+/* Recipes / Grocery / Home: list in the wide column, add-form as a sticky side panel. */
+#view-recipes.active,#view-grocery.active,#view-home.active{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:16px;align-items:start}
+#view-recipes>.view-head,#view-grocery>.view-head,#view-home>.view-head{grid-column:1/-1}
+#view-recipes>.card,#view-grocery>.card,#view-home>.card{margin-bottom:0}
+#view-recipes>.card.side-panel,#view-grocery>.card.side-panel,#view-home>.card.side-panel{grid-column:2;grid-row:2/span 10;position:sticky;top:132px}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -416,25 +454,13 @@ html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width:900px){ .grid-2{grid-template-columns:1fr} }
+@media (max-width:900px){ .grid-2{grid-template-columns:1fr} #view-today.active{display:block} #view-today>.card{margin-bottom:16px} #view-recipes.active,#view-grocery.active,#view-home.active{display:block} #view-recipes>.card,#view-grocery>.card,#view-home>.card{margin-bottom:16px;position:static} }
 @media (max-width:860px){
-  .app{flex-direction:column}
-  .sidebar{
-    width:100%;flex:none;height:auto;position:static;padding:14px 16px 10px;
-  }
-  .brand{display:flex;align-items:baseline;gap:12px;padding:0 2px 8px;margin-bottom:0;border-bottom:none}
-  .wordmark{font-size:16px}
-  .wordmark-sub{font-size:20px;margin-top:0}
-  .brand-tag{display:none}
-  .sidefoot{display:none}
-  .sidebar nav{
-    position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--teal);
-    flex-direction:row;overflow-x:auto;padding:8px 10px;padding-bottom:calc(8px + env(safe-area-inset-bottom));gap:6px;
-    box-shadow:0 -4px 18px rgba(11,56,59,.25);-webkit-overflow-scrolling:touch;
-  }
-  .nav-btn{width:auto;white-space:nowrap;border-left:none;border-bottom:3px solid transparent;border-radius:10px;padding:9px 13px;font-size:13px}
-  .nav-btn.active{border-bottom-color:var(--gold)}
-  main{padding:18px 14px 110px}
+  .topbar-inner{padding:12px 14px 10px}
+  .topbar .brand-tag{display:none}
+  .tabbar{padding:8px 14px 10px;scroll-padding:0 14px}
+  .tab-btn{padding:9px 13px;font-size:13px}
+  main{padding:18px 14px calc(28px + env(safe-area-inset-bottom))}
   .view-head h1{font-size:25px}
   .card{padding:16px}
   .cal-day{min-height:46px;font-size:13.5px}
@@ -442,6 +468,8 @@ html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
   input,textarea,select{font-size:16px}
   .sched-row input,.habit-name-input,.note-body,.inbox-actions input[type="date"]{font-size:16px}
 }
+/* On very narrow phones the owner name drops out so the top-bar actions stay on one row. */
+@media (max-width:560px){ .topbar .brand-owner{display:none} }
 <style>
 /* ============================================================
    FedorianStudio ADHD Planner 2026–2027 — single-file web app
@@ -481,34 +509,50 @@ input,textarea,select{font-family:inherit;font-size:15px;color:var(--ink)}
 ::placeholder{color:#9AA39E}
 
 /* ---------- App layout ---------- */
-.app{display:flex;min-height:100vh;min-height:100dvh}
-main{flex:1;min-width:0;padding:28px 22px 60px}
-.wrap{max-width:940px;margin:0 auto}
+.app{min-height:100vh;min-height:100dvh}
+main{min-width:0;padding:28px 22px 60px}
+.wrap{max-width:1120px;margin:0 auto}
+.appfoot{max-width:1120px;margin:0 auto;padding:18px 4px calc(24px + env(safe-area-inset-bottom));text-align:center;font-size:12.5px;color:#9AA39E}
 
 /* ---------- Sidebar ---------- */
-.sidebar{
-  width:248px;flex:0 0 248px;background:var(--teal);color:var(--ivory);
-  position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
-  padding:26px 18px 18px;z-index:60;
+.topbar{
+  position:sticky;top:0;z-index:100;background:var(--teal);color:var(--ivory);
+  padding-top:env(safe-area-inset-top);
+  box-shadow:0 4px 18px rgba(11,56,59,.25);
 }
-.brand{padding:2px 6px 20px;border-bottom:1px solid rgba(247,243,236,.16);margin-bottom:16px}
-.wordmark{font-weight:800;letter-spacing:.34em;font-size:19px;color:#fff}
-.wordmark-sub{
+.topbar-inner{
+  max-width:1120px;margin:0 auto;padding:14px 22px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.topbar .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.topbar .wordmark{font-weight:800;letter-spacing:.34em;font-size:19px;color:#fff}
+.topbar .wordmark-sub{
   font-family:'Segoe Script','Brush Script MT','Comic Sans MS',cursive;
-  color:var(--gold);font-size:24px;line-height:1;margin-top:2px;
+  color:var(--gold);font-size:24px;line-height:1;
 }
-.brand-tag{margin-top:10px;font-size:10px;letter-spacing:.22em;font-weight:600;color:rgba(247,243,236,.65)}
-nav{display:flex;flex-direction:column;gap:4px}
-.nav-btn{
-  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-  background:transparent;border:none;border-left:3px solid transparent;
-  color:rgba(247,243,236,.85);font-size:14px;font-weight:600;
-  padding:11px 12px;border-radius:0 10px 10px 0;min-height:44px;
+.topbar .brand-tag{font-size:10px;letter-spacing:.22em;font-weight:600;color:rgba(247,243,236,.65)}
+.topbar-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .brand-owner{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold)}
+.topbar-gear{color:var(--ivory);border-color:rgba(247,243,236,.35)}
+.topbar-gear:hover{color:#fff;border-color:var(--gold);background:rgba(247,243,236,.08)}
+.tabbar{
+  display:flex;gap:8px;overflow-x:auto;padding:8px 22px 10px;
+  background:var(--ivory);border-bottom:1px solid var(--border);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-padding:0 22px;
+}
+.tabbar::-webkit-scrollbar{display:none}
+.tab-btn{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  background:transparent;border:1.5px solid transparent;border-radius:8px;
+  color:var(--ink-soft);font-size:14px;font-weight:600;
+  padding:9px 14px;min-height:44px;
   transition:background-color .18s ease,color .18s ease,border-color .18s ease;
 }
-.nav-btn:hover{background:rgba(247,243,236,.08);color:#fff}
-.nav-btn.active{background:rgba(199,161,92,.16);border-left-color:var(--gold);color:#fff}
-.sidefoot{margin-top:auto;padding:12px 6px 2px;font-size:11.5px;line-height:1.55;color:rgba(247,243,236,.55);border-top:1px solid rgba(247,243,236,.16)}
+.tab-btn:hover{background:#fff;border-color:var(--border);color:var(--teal)}
+.tab-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(11,56,59,.18)}
+.tab-btn .ic{width:20px;height:20px;color:var(--muted-teal);transition:color .18s ease}
+.tab-btn:hover .ic{color:var(--teal)}
+.tab-btn.active .ic{color:#fff}
 
 /* ---------- Views & cards ---------- */
 .view{display:none}
@@ -531,26 +575,28 @@ nav{display:flex;flex-direction:column;gap:4px}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   background:var(--teal);color:#fff;border:1px solid var(--teal);
-  font-size:14px;font-weight:600;padding:10px 18px;border-radius:10px;min-height:44px;
+  font-size:14px;font-weight:600;padding:10px 18px;border-radius:6px;min-height:44px;
   transition:background-color .18s ease,border-color .18s ease,transform .15s ease,box-shadow .15s ease;
 }
-.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,56,59,.14)}
+.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 0 0 2px rgba(199,161,92,.5),0 4px 12px rgba(11,56,59,.14)}
+.btn:active{transform:translateY(0);box-shadow:0 0 0 2px rgba(199,161,92,.65)}
 .btn:disabled:hover{transform:none;box-shadow:none}
 .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--teal-dark)}
-.btn.gold:hover{background:#B8934A}
+.btn.gold:hover{background:#B8934A;box-shadow:0 0 0 2px rgba(11,56,59,.28),0 4px 12px rgba(11,56,59,.14)}
 .btn.ghost{background:transparent;color:var(--teal);border-color:var(--border)}
 .btn.ghost:hover{border-color:var(--gold);background:#fff}
-.btn.small{padding:7px 13px;min-height:38px;font-size:13px}
+.btn.small{padding:10px 14px;min-height:44px;font-size:13px}
 .btn.danger{background:transparent;border-color:#E4C4B2;color:var(--danger)}
 .btn.danger:hover{background:#FBEEE7}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.tab-btn:focus-visible,.chip:focus-visible,.seg-btn:focus-visible,.swatch:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .icon-btn{
-  background:transparent;border:1px solid transparent;color:#9AA39E;border-radius:8px;
-  width:34px;height:34px;font-size:17px;line-height:1;flex:0 0 auto;
+  background:transparent;border:1px solid transparent;color:#9AA39E;border-radius:6px;
+  width:44px;height:44px;font-size:18px;line-height:1;flex:0 0 auto;
 }
 .icon-btn:hover{color:var(--danger);border-color:var(--border);background:#fff}
 .text-input,.text-area,.select-input{
-  width:100%;background:#fff;border:1px solid var(--border);border-radius:10px;
+  width:100%;background:#fff;border:1px solid var(--border);border-radius:8px;
   padding:11px 13px;outline:none;
 }
 .text-input:focus,.text-area:focus,.select-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,161,92,.18)}
@@ -561,7 +607,7 @@ input[type="file"]{display:none}
 
 /* Round check toggle (focus / todos / routines) */
 .check{
-  width:30px;height:30px;flex:0 0 30px;border-radius:50%;
+  width:44px;height:44px;flex:0 0 44px;border-radius:50%;
   border:2px solid var(--border);background:#fff;color:#fff;font-size:15px;font-weight:700;
   display:inline-flex;align-items:center;justify-content:center;line-height:1;padding:0;
   transition:background-color .18s ease,border-color .18s ease,transform .12s ease;
@@ -673,13 +719,14 @@ table.habit-table th.habit-name-col,table.habit-table td.habit-name-cell{
 /* ---------- Today habit chips ---------- */
 .chip-row{display:flex;flex-wrap:wrap;gap:9px}
 .chip{
-  border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:10px 16px;
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:10px 16px;
   font-size:14px;font-weight:600;color:var(--ink-soft);min-height:44px;
   transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .12s ease;
 }
 .chip:active{transform:scale(.95)}
-.chip:hover{border-color:var(--sage)}
-.chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+.chip:hover{border-color:var(--teal);color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(11,56,59,.18)}
 
 /* ---------- Routines ---------- */
 .routine-row{display:flex;align-items:center;gap:12px;padding:6px 0}
@@ -730,16 +777,16 @@ table.habit-table th.habit-name-col,table.habit-table td.habit-name-cell{
 
 /* ---------- Icons & motion ---------- */
 .ic{width:19px;height:19px;flex:0 0 auto}
-.nav-btn .ic{width:20px;height:20px;color:rgba(247,243,236,.55);transition:color .18s ease}
-.nav-btn:hover .ic{color:#fff}
-.nav-btn.active .ic{color:var(--gold)}
+.tab-btn .ic{width:20px;height:20px;color:var(--muted-teal);transition:color .18s ease}
+.tab-btn:hover .ic{color:var(--teal)}
+.tab-btn.active .ic{color:#fff}
 .btn .ic{width:17px;height:17px}
 .check .ic{width:16px;height:16px}
 .habit-cell .ic{width:15px;height:15px}
 .chip .ic{width:15px;height:15px;vertical-align:-2px;margin-right:1px}
 .glass .ic{width:22px;height:22px}
 .pill-label .ic{width:15px;height:15px;vertical-align:-2px;margin-right:3px}
-body,.card,.sidebar{transition:background-color .25s ease,color .25s ease}
+body,.card,.topbar,.tabbar{transition:background-color .25s ease,color .25s ease}
 @keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .view.active{animation:viewIn .22s ease}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -752,20 +799,20 @@ body,.card,.sidebar{transition:background-color .25s ease,color .25s ease}
 @keyframes focusGlow{0%{box-shadow:var(--shadow)}35%{box-shadow:0 0 0 3px rgba(199,161,92,.55),0 0 28px rgba(199,161,92,.5)}100%{box-shadow:var(--shadow)}}
 .card.focus-card.glow{animation:focusGlow 1.05s ease}
 
-/* ---------- Personalisation: greeting & sidebar owner ---------- */
+/* ---------- Personalisation: greeting & top-bar owner ---------- */
 .greeting{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:600;color:var(--gold);margin-top:6px}
 .brand-owner{margin-top:8px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold)}
-@media (max-width:860px){ .brand-owner{display:none !important} }
 
 /* ---------- Personalisation: controls ---------- */
 .swatch-row{display:flex;flex-wrap:wrap;gap:9px}
-.swatch{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:999px;padding:7px 13px 7px 8px;font-size:13px;font-weight:600;color:var(--ink-soft);min-height:40px;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
+.swatch{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:7px 13px 7px 8px;font-size:13px;font-weight:600;color:var(--ink-soft);min-height:44px;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
 .swatch .dot{width:24px;height:24px;border-radius:50%;border:2px solid rgba(24,31,28,.12);flex:0 0 auto}
-.swatch.on{border-color:var(--gold);color:var(--ink)}
+.swatch.on{border-color:var(--gold);color:var(--ink);box-shadow:0 0 0 2px rgba(199,161,92,.35)}
 .swatch.on .dot{box-shadow:0 0 0 3px rgba(199,161,92,.35)}
-.seg{display:flex;gap:8px;flex-wrap:wrap}
-.seg-btn{background:#fff;border:1.5px solid var(--border);color:var(--ink-soft);border-radius:10px;padding:9px 18px;font-size:13.5px;font-weight:600;min-height:42px;transition:background-color .18s ease,color .18s ease,border-color .18s ease}
-.seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.seg{display:inline-flex;gap:4px;flex-wrap:wrap;background:#F1EAD9;border:1px solid var(--border);border-radius:8px;padding:4px}
+.seg-btn{background:transparent;border:1.5px solid transparent;color:var(--ink-soft);border-radius:6px;padding:9px 18px;font-size:13.5px;font-weight:600;min-height:44px;transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease}
+.seg-btn:hover{color:var(--teal)}
+.seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 2px 8px rgba(11,56,59,.25)}
 
 /* ---------- Personalisation: accent themes (gold stays the constant secondary) ---------- */
 html[data-theme="midnight"]{--teal:#1B2A4A;--teal-dark:#111D34;--muted-teal:#5B729E;--sage:#7E93B5}
@@ -790,10 +837,18 @@ html[data-appearance="dark"] .cal-day,html[data-appearance="dark"] .swatch,html[
 html[data-appearance="dark"] .check,html[data-appearance="dark"] .habit-cell{background:var(--card)}
 html[data-appearance="dark"] .check.on{background:var(--sage);border-color:var(--sage)}
 html[data-appearance="dark"] .habit-cell.on{background:var(--sage);border-color:var(--sage)}
-html[data-appearance="dark"] .chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+html[data-appearance="dark"] .chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
 html[data-appearance="dark"] .pill.on{background:var(--gold);border-color:var(--gold);color:#fff}
 html[data-appearance="dark"] .glass.on{background:var(--muted-teal);border-color:var(--muted-teal);color:#fff}
 html[data-appearance="dark"] .seg-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}
+html[data-appearance="dark"] .tabbar{background:var(--card);border-bottom-color:var(--border)}
+html[data-appearance="dark"] .tab-btn{color:var(--ink-soft)}
+html[data-appearance="dark"] .tab-btn:hover{background:var(--card);color:var(--ink);border-color:var(--border)}
+html[data-appearance="dark"] .seg{background:var(--border)}
+html[data-appearance="dark"] .seg-btn{background:transparent}
+html[data-appearance="dark"] .btn.ghost{color:var(--ink)}
+html[data-appearance="dark"] .btn.ghost:hover{background:var(--card)}
+html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 html[data-appearance="dark"] .cal-day.selected{background:rgba(199,161,92,.14)}
 html[data-appearance="dark"] .inbox-row,html[data-appearance="dark"] .note-card{background:var(--card)}
 html[data-appearance="dark"] .sched-row,html[data-appearance="dark"] .week-day-row{border-bottom-color:var(--border)}
@@ -804,6 +859,17 @@ html[data-appearance="dark"] .btn.ghost{color:var(--ink)}
 html[data-appearance="dark"] .btn.ghost:hover{background:var(--card)}
 html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 
+/* ---------- Meal dashboard & split layouts (student shell) ---------- */
+/* Today dashboard: two columns of sections on desktop. */
+#view-today.active{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+#view-today>.view-head{grid-column:1/-1}
+#view-today>.card{margin-bottom:0}
+/* Recipes / Grocery / Home: list in the wide column, add-form as a sticky side panel. */
+#view-recipes.active,#view-grocery.active,#view-home.active{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:16px;align-items:start}
+#view-recipes>.view-head,#view-grocery>.view-head,#view-home>.view-head{grid-column:1/-1}
+#view-recipes>.card,#view-grocery>.card,#view-home>.card{margin-bottom:0}
+#view-recipes>.card.side-panel,#view-grocery>.card.side-panel,#view-home>.card.side-panel{grid-column:2;grid-row:2/span 10;position:sticky;top:132px}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -811,25 +877,13 @@ html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width:900px){ .grid-2{grid-template-columns:1fr} }
+@media (max-width:900px){ .grid-2{grid-template-columns:1fr} #view-today.active{display:block} #view-today>.card{margin-bottom:16px} #view-recipes.active,#view-grocery.active,#view-home.active{display:block} #view-recipes>.card,#view-grocery>.card,#view-home>.card{margin-bottom:16px;position:static} }
 @media (max-width:860px){
-  .app{flex-direction:column}
-  .sidebar{
-    width:100%;flex:none;height:auto;position:static;padding:14px 16px 10px;
-  }
-  .brand{display:flex;align-items:baseline;gap:12px;padding:0 2px 8px;margin-bottom:0;border-bottom:none}
-  .wordmark{font-size:16px}
-  .wordmark-sub{font-size:20px;margin-top:0}
-  .brand-tag{display:none}
-  .sidefoot{display:none}
-  .sidebar nav{
-    position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--teal);
-    flex-direction:row;overflow-x:auto;padding:8px 10px;padding-bottom:calc(8px + env(safe-area-inset-bottom));gap:6px;
-    box-shadow:0 -4px 18px rgba(11,56,59,.25);-webkit-overflow-scrolling:touch;
-  }
-  .nav-btn{width:auto;white-space:nowrap;border-left:none;border-bottom:3px solid transparent;border-radius:10px;padding:9px 13px;font-size:13px}
-  .nav-btn.active{border-bottom-color:var(--gold)}
-  main{padding:18px 14px 110px}
+  .topbar-inner{padding:12px 14px 10px}
+  .topbar .brand-tag{display:none}
+  .tabbar{padding:8px 14px 10px;scroll-padding:0 14px}
+  .tab-btn{padding:9px 13px;font-size:13px}
+  main{padding:18px 14px calc(28px + env(safe-area-inset-bottom))}
   .view-head h1{font-size:25px}
   .card{padding:16px}
   .cal-day{min-height:46px;font-size:13.5px}
@@ -837,11 +891,13 @@ html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
   input,textarea,select{font-size:16px}
   .sched-row input,.habit-name-input,.note-body,.inbox-actions input[type="date"]{font-size:16px}
 }
+/* On very narrow phones the owner name drops out so the top-bar actions stay on one row. */
+@media (max-width:560px){ .topbar .brand-owner{display:none} }
 </style>
 <style>
 /* ============================================================
    Demo chrome (demo file only — not part of the product):
-   fixed banner + layout offset + sidebar DEMO pill.
+   fixed banner + layout offset + topbar DEMO pill.
    ============================================================ */
 :root{ --demo-bar-h: 42px }
 #demoBanner{
@@ -860,16 +916,12 @@ html[data-appearance="dark"] .icon-btn:hover{background:var(--card)}
 }
 #demoBanner .demo-x:hover{ color:#fff }
 body{ padding-top:var(--demo-bar-h) }
+.topbar{ top:var(--demo-bar-h) }
 .app{ min-height:calc(100vh - var(--demo-bar-h)); min-height:calc(100dvh - var(--demo-bar-h)) }
-@media (min-width:861px){
-  .sidebar{ top:var(--demo-bar-h); height:calc(100vh - var(--demo-bar-h)); height:calc(100dvh - var(--demo-bar-h)) }
-}
 html.demo-off #demoBanner{ display:none }
 html.demo-off body{ padding-top:0 }
+html.demo-off .topbar{ top:0 }
 html.demo-off .app{ min-height:100vh; min-height:100dvh }
-@media (min-width:861px){
-  html.demo-off .sidebar{ top:0; height:100vh; height:100dvh }
-}
 .demo-pill{
   display:inline-block; font-family:'Montserrat',sans-serif; font-size:9.5px; font-weight:800;
   letter-spacing:.18em; background:#C7A15C; color:#0B383B; border-radius:999px;
@@ -901,28 +953,31 @@ window.addEventListener('appinstalled', function(){ window.__fedorianInstallProm
 </script>
 <div class="app">
 
-  <!-- ============ Sidebar / navigation (Product #1 shell, unchanged) ============ -->
-  <aside class="sidebar">
-    <div class="brand">
-      <div>
-        <div class="wordmark">FEDORIAN</div>
-        <div class="wordmark-sub">studio <span class="demo-pill">DEMO</span></div>
+  <!-- ============ Top app bar + pill tab bar (student planner format) ============ -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="wordmark">FEDORIAN</span>
+        <span class="wordmark-sub">studio <span class="demo-pill">DEMO</span></span>
+        <span class="brand-tag">MEAL &amp; HOME PLANNER · 2026–2027</span>
       </div>
-      <div class="brand-tag">MEAL &amp; HOME PLANNER · 2026–2027</div>
-      <div class="brand-owner" id="brandOwner" style="display:none"></div>
+      <div class="topbar-actions">
+        <span class="brand-owner" id="brandOwner" style="display:none"></span>
+        <button class="btn" data-action="nav" data-view="mealplan">+ New meal</button>
+        <button class="icon-btn topbar-gear" data-action="nav" data-view="settings" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2"/><path stroke-width="2.3" d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></svg></button>
+      </div>
     </div>
-    <nav id="mainNav" aria-label="Planner sections">
-      <button class="nav-btn" data-action="nav" data-view="today"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4 19 19M19 5l-1.6 1.6M6.6 17.4 5 19"/></svg>Today</button>
-      <button class="nav-btn" data-action="nav" data-view="mealplan"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12.5h6M9 16.5h4"/></svg>Meal Plan</button>
-      <button class="nav-btn" data-action="nav" data-view="recipes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 11h16"/><path d="M6 11v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6"/><path d="M9 11V8M15 11V8"/></svg>Recipes</button>
-      <button class="nav-btn" data-action="nav" data-view="grocery"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 4h2l2.4 11h11.6l2-8H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Grocery</button>
-      <button class="nav-btn" data-action="nav" data-view="home"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg>Home</button>
-      <button class="nav-btn" data-action="nav" data-view="week"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="4.6" height="15" rx="1"/><rect x="9.7" y="4.5" width="4.6" height="15" rx="1"/><rect x="15.9" y="4.5" width="4.6" height="15" rx="1"/></svg>Week</button>
-      <button class="nav-btn" data-action="nav" data-view="notes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.5 3.5H7A1.5 1.5 0 0 0 5.5 5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M13.5 3.5v5h5"/><path d="M9 13h6M9 16.5h6"/></svg>Notes</button>
-      <button class="nav-btn" data-action="nav" data-view="settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2"/><path stroke-width="2.3" d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></svg>Settings</button>
+    <nav id="mainNav" class="tabbar" aria-label="Meal planner sections">
+      <button class="tab-btn" data-action="nav" data-view="today"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4 19 19M19 5l-1.6 1.6M6.6 17.4 5 19"/></svg>Today</button>
+      <button class="tab-btn" data-action="nav" data-view="mealplan"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12.5h6M9 16.5h4"/></svg>Meal Plan</button>
+      <button class="tab-btn" data-action="nav" data-view="recipes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 11h16"/><path d="M6 11v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6"/><path d="M9 11V8M15 11V8"/></svg>Recipes</button>
+      <button class="tab-btn" data-action="nav" data-view="grocery"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 4h2l2.4 11h11.6l2-8H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Grocery</button>
+      <button class="tab-btn" data-action="nav" data-view="home"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg>Home</button>
+      <button class="tab-btn" data-action="nav" data-view="week"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="4.6" height="15" rx="1"/><rect x="9.7" y="4.5" width="4.6" height="15" rx="1"/><rect x="15.9" y="4.5" width="4.6" height="15" rx="1"/></svg>Week</button>
+      <button class="tab-btn" data-action="nav" data-view="notes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.5 3.5H7A1.5 1.5 0 0 0 5.5 5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M13.5 3.5v5h5"/><path d="M9 13h6M9 16.5h6"/></svg>Notes</button>
+      <button class="tab-btn" data-action="nav" data-view="settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2"/><path stroke-width="2.3" d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></svg>Settings</button>
     </nav>
-    <div class="sidefoot">Planners for every brain and every plan. Your data is saved only in this browser, on this device.</div>
-  </aside>
+  </header>
 
   <!-- ============ Views ============ -->
   <main>
@@ -946,7 +1001,7 @@ window.addEventListener('appinstalled', function(){ window.__fedorianInstallProm
           <h2>Make it yours</h2>
           <p class="hint">Personal touches, saved on this device only. They apply instantly and never touch your planner data.</p>
           <h3>Your name</h3>
-          <input type="text" class="text-input" id="prefName" data-pref="name" placeholder="e.g. Alex — shown in the sidebar and on Today" autocomplete="off">
+          <input type="text" class="text-input" id="prefName" data-pref="name" placeholder="e.g. Alex — shown at the top and on Today" autocomplete="off">
           <h3 style="margin-top:18px">Accent theme</h3>
           <div class="swatch-row">
             <button class="swatch" data-action="pref-theme" data-theme="teal"><span class="dot" style="background:#0B383B"></span>Deep Teal</button>
@@ -1003,6 +1058,7 @@ window.addEventListener('appinstalled', function(){ window.__fedorianInstallProm
       </section>
     </div>
   </main>
+  <div class="appfoot">Planners for every brain and every plan. Your data is saved only in this browser, on this device.</div>
 </div>
 
 <!-- Add to Home Screen guided sheet (opened from Settings; the steps are filled in for the visitor's platform by the main script) -->
@@ -1341,7 +1397,7 @@ function renderRecipes(){
       <h1>Recipes</h1>
       <p class="sub">Your own bank — the meals you actually make, with their ingredients ready to send to the list.</p>
     </div>
-    <div class="card">
+    <div class="card side-panel">
       <h2>Add a recipe</h2>
       <input type="text" class="text-input" id="recipeName" placeholder="Recipe name" autocomplete="off">
       <select class="select-input" id="recipeType" style="margin-top:8px">
@@ -1376,7 +1432,7 @@ function renderGrocery(){
       <h1>Grocery</h1>
       <p class="sub">${remaining ? remaining + (remaining === 1 ? ' item' : ' items') + ' still to buy.' : 'List is clear.'}</p>
     </div>
-    <div class="card">
+    <div class="card side-panel">
       <h2>Add an item</h2>
       <input type="text" class="text-input" id="groceryText" placeholder="e.g. Bananas" autocomplete="off">
       <select class="select-input" id="groceryCat" style="margin-top:8px">
@@ -1418,7 +1474,7 @@ function renderHome(){
       <h1>Home</h1>
       <p class="sub">Chores that forgive you. Overdue tasks wait here — they never turn red, and nothing breaks.</p>
     </div>
-    <div class="card">
+    <div class="card side-panel">
       <h2>Add a home task</h2>
       <input type="text" class="text-input" id="homeText" placeholder="e.g. Clean the bathroom mirror" autocomplete="off">
       <div class="grid-2" style="margin-top:8px">
@@ -1538,7 +1594,7 @@ function showView(name){
     sec.classList.add('entering');
     setTimeout(() => sec.classList.remove('entering'), 520);
   }
-  document.querySelectorAll('#mainNav .nav-btn').forEach(b =>
+  document.querySelectorAll('#mainNav .tab-btn').forEach(b =>
     b.classList.toggle('active', b.dataset.view === name));
   renderCurrent();
   window.scrollTo({ top: 0 });
